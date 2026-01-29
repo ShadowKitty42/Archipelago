@@ -680,6 +680,9 @@
     <Compile Include="worlds\civ_6\test\__init__.py" />
     <Compile Include="worlds\civ_6\TunerClient.py" />
     <Compile Include="worlds\civ_6\__init__.py" />
+    <Compile Include="worlds\CotL\items.py" />
+    <Compile Include="worlds\CotL\locations.py" />
+    <Compile Include="worlds\CotL\_init_.py" />
     <Compile Include="worlds\cv64\aesthetics.py" />
     <Compile Include="worlds\cv64\client.py" />
     <Compile Include="worlds\cv64\data\ename.py" />
@@ -2309,6 +2312,7 @@
     <Folder Include="worlds\mmbn3\Names" />
     <Folder Include="worlds\musedash" />
     <Folder Include="worlds\musedash\test" />
+    <Folder Include="worlds\CotL\" />
     <Folder Include="worlds\noita" />
     <Folder Include="worlds\oot" />
     <Folder Include="worlds\oot\data" />
