@@ -3,7 +3,7 @@ import typing
 
 from BaseClasses import Location
 
-class CultoftheLambLocation(Location):  # or from Locations import MyGameLocation
+class CotLLocation(Location):  # or from Locations import MyGameLocation
     game = "Cult of the Lamb"  # name of the game/world this location is in
 
 class LocationData:

@@ -682,6 +682,7 @@
     <Compile Include="worlds\civ_6\__init__.py" />
     <Compile Include="worlds\CotL\items.py" />
     <Compile Include="worlds\CotL\locations.py" />
+    <Compile Include="worlds\CotL\options.py" />
     <Compile Include="worlds\CotL\_init_.py" />
     <Compile Include="worlds\cv64\aesthetics.py" />
     <Compile Include="worlds\cv64\client.py" />
