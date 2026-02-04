@@ -17,7 +17,7 @@ mygame_items: typing.List[ItemData] = [
  # Shrine Items 
 
     #Tier 1 
-    ItemData("Temple", ItemClassification.useful), #Type: TEMPLE
+    #ItemData("Temple", ItemClassification.useful), #Type: TEMPLE
     ItemData("Progressive Bed", ItemClassification.useful), #Type: BED
     #will need make this a progressive bed due to how its built sleeping bag
     ItemData("Body Pit", ItemClassification.useful), #Type: BODY_PIT
@@ -67,7 +67,7 @@ mygame_items: typing.List[ItemData] = [
     ItemData("Progressive Harvest Totem", ItemClassification.useful), 
 
     #Tier 4
-    ItemData("Progressive Temple & Shrine Upgrade", ItemClassification.useful), #Type: TEMPLE_III
+    ItemData("Progressive Shrine & Temple Upgrade", ItemClassification.useful), #Type: TEMPLE_III
     #progressive
     ItemData("Shared Shelter", ItemClassification.useful), #Type: SHARED_HOUSE
     ItemData("Progressive Bed", ItemClassification.useful), #Type: BED_3
@@ -90,7 +90,7 @@ mygame_items: typing.List[ItemData] = [
     ItemData("Progressive Scarecrow", ItemClassification.useful), #Type: SCARECROW_2
     
     #Tier 5
-    ItemData("Progressive Temple & Shrine Upgrade", ItemClassification.useful), #Type: TEMPLE_IV
+    ItemData("Progressive Shrine & Temple Upgrade", ItemClassification.useful), #Type: TEMPLE_IV
     ItemData("Progressive Outhouse", ItemClassification.useful), #Type: OUTHOUSE_2
     ItemData("Progressive Healing Bay", ItemClassification.useful), #Type: HEALING_BAY_2
     ItemData("Leader Tent", ItemClassification.useful), 

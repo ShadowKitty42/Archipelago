@@ -18,7 +18,7 @@ mygame_locations : typing.List[LocationData] = [
     # Shrine Checks 
 
     #Tier 1 
-    LocationData("Temple"), #Center
+    #LocationData("Temple"), #Center
     # Building_Temple  
     LocationData("Sleeping Bags"), #L1
     # Building_Beds  
