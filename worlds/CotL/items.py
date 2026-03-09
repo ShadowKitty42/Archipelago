@@ -1,15 +1,16 @@
+from ast import Tuple
 import typing
 from BaseClasses import Item, ItemClassification
 
 class CotLItem(Item):  # or from Items import MyGameItem
     game = "Cult of the Lamb"  # name of the game/world this item is from
 
-class ItemData(Item):
-    name: str
+class ItemData(Tuple):
+    itemName: str
     progression: ItemClassification
     upgrade_name: str
     def __init__(self, itemName, progression, upgrade_name):
-        self.name = itemName
+        self.itemName = itemName
         self.progression = progression
         self.upgrade_name = upgrade_name
 
