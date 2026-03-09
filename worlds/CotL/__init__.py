@@ -17,6 +17,7 @@ class MyGameWorld(World):
     options_dataclass = CotLOptions  # options the player can set
     options: CotLOptions  # typing hints for option results
     topology_present = False  # show path to required location checks in spoiler
+    ap_version = "0.0.0.1"
 
     # ID of first item and location, could be hard-coded but code may be easier
     # to read with this as a property.
@@ -100,7 +101,14 @@ class MyGameWorld(World):
         # also be left empty if no data is needed.
         self.slot_data_ready.wait()
         slot_data = {
-            "shrine_dict": self.shrine_dict
+            "APWorld_Version": self.ap_version,
+            "AP_seed": str(self.multiworld.seed),
+            "AP_slotName": self.multiworld.player_name[self.player],
+            "AP_PlayerID": self.player,
+            "URL": "archipelago.gg",
+            "port": str(38281),
+            "shrine_dict": self.shrine_dict,
+            "goal": "collect_poop"
         }
         return slot_data
 
