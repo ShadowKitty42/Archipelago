@@ -5,13 +5,15 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{bf584be1-b973-4b0c-9309-0e54bfb5ea2a}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Launcher.py</StartupFile>
+    <StartupFile>..\compile.bat</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -684,7 +686,7 @@
     <Compile Include="worlds\CotL\locations.py" />
     <Compile Include="worlds\CotL\options.py" />
     <Compile Include="worlds\CotL\rules.py" />
-    <Compile Include="worlds\CotL\_init_.py" />
+    <Compile Include="worlds\CotL\__init__.py" />
     <Compile Include="worlds\cv64\aesthetics.py" />
     <Compile Include="worlds\cv64\client.py" />
     <Compile Include="worlds\cv64\data\ename.py" />
