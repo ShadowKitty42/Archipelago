@@ -5,7 +5,7 @@ from BaseClasses import Item, ItemClassification
 class CotLItem(Item):  # or from Items import MyGameItem
     game = "Cult of the Lamb"  # name of the game/world this item is from
 
-class ItemData(Tuple):
+class ItemData:
     itemName: str
     progression: ItemClassification
     upgrade_name: str
