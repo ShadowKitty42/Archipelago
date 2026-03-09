@@ -82,6 +82,7 @@ mygame_items: typing.List[ItemData] = [
     ItemData("Progressive Tabernacle", ItemClassification.useful, "Prog_Tabernacle"), 
     ItemData("Progressive Shrine Flame", ItemClassification.useful, "Prog_ShrineFlame"), 
     ItemData("Progressive Drink House", ItemClassification.useful, "Prog_Pub"), #Type: PUB
+    ItemData("Drum Circle", ItemClassification.useful, "Building_Drum"),
     ItemData("Mating Tent", ItemClassification.useful, "Building_MatingTent"),
     ItemData("Progressive Hatchery", ItemClassification.useful, "Prog_Hatchery"),
     ItemData("Progressive Crypt", ItemClassification.useful, "Prog_Crypt"), 
