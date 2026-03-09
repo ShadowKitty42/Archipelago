@@ -1,5 +1,4 @@
 
-from turtle import position
 import typing
 
 from BaseClasses import Location
@@ -35,7 +34,7 @@ mygame_locations : typing.List[LocationData] = [
     # Building_Beds  
     LocationData("Body Pit", "Building_BodyPit", "Shrine", 1, "L2"), #L2
     # Building_BodyPit   
-    LocationData("Farm Plot", "Building_Farms" "Shrine", 1, "R1"), #R1
+    LocationData("Farm Plot", "Building_Farms", "Shrine", 1, "R1"), #R1
     # Building_Farms    
     LocationData("Farming Bundle 1", "Building_FollowerFarming", "Shrine", 1, "R2_1"), #R2
     # Building_FollowerFarming    
@@ -51,7 +50,7 @@ mygame_locations : typing.List[LocationData] = [
     # Building_Decorations1
     LocationData("Shelter", "Building_BetterBeds", "Shrine", 2, "L2"), #L2
     # Building_BetterBeds
-    LocationData("Offering Statue", "Shrine_OfferingStatue", 2, "L3"), #L3
+    LocationData("Offering Statue", "Shrine_OfferingStatue", "Shrine", 2, "L3"), #L3
     # Shrine_OfferingStatue
     LocationData("Tabernacle", "Shrine_PassiveShrines", "Shrine", 2, "L4"), #L4
     # Shrine_PassiveShrines

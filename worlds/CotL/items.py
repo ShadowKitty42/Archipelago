@@ -4,13 +4,12 @@ from BaseClasses import Item, ItemClassification
 class CotLItem(Item):  # or from Items import MyGameItem
     game = "Cult of the Lamb"  # name of the game/world this item is from
 
-
-class ItemData:
-    itemName: str
+class ItemData(Item):
+    name: str
     progression: ItemClassification
     upgrade_name: str
     def __init__(self, itemName, progression, upgrade_name):
-        self.itemName = itemName
+        self.name = itemName
         self.progression = progression
         self.upgrade_name = upgrade_name
 
