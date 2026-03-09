@@ -4,14 +4,14 @@
 import typing
 import threading
 from .options import CotLOptions  # the options we defined earlier
-from .items import CotLItem, mygame_items  # data used below to add items to the World
+from .items import ItemData, mygame_items  # data used below to add items to the World
 from .locations import CotLLocation, mygame_locations  # same as above
 from worlds.AutoWorld import World
-from BaseClasses import Region, Location, Entrance, Item, RegionType, ItemClassification
+from BaseClasses import Region, Location, Entrance
 from .rules import *
 
 
-class MyGameWorld(World):
+class CotLWorld(World):
     """Insert description of the world/game here."""
     game = "Cult of the Lamb"  # name of the game/world
     options_dataclass = CotLOptions  # options the player can set
@@ -32,8 +32,8 @@ class MyGameWorld(World):
     # The following two dicts are required for the generation to know which
     # items exist. They could be generated from json or something else. They can
     # include events, but don't have to since events will be placed manually.
-    item_name_to_id = {name: id for id, name in enumerate(mygame_items, base_id)}
-    location_name_to_id = {name: id for id, name in enumerate(mygame_locations, base_id)}
+    item_name_to_id = {itemName: index for index, itemName in enumerate(mygame_items, base_id)}
+    location_name_to_id = {locationName: index for index, locationName in enumerate(mygame_locations, base_id)}
 
     items_by_name = {item.itemName: item for item in mygame_items}
     locations_by_name = {location.locationName: location for location in mygame_locations}
@@ -112,6 +112,6 @@ class MyGameWorld(World):
         }
         return slot_data
 
-    def create_item(self, name: str) -> CotLItem:
+    def create_item(self, name: str) -> ItemData:
         item = self.items_by_name[name]
-        return CotLItem(item.itemName, item.progression, self.item_name_to_id[name], self.player)
+        return ItemData(item.itemName, item.progression, self.item_name_to_id[name], self.player)
