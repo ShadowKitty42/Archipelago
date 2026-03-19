@@ -37,7 +37,7 @@ class CotLWorld(World):
 
     items_by_name = {item.itemName: item for item in mygame_items}
     locations_by_name = {location.locationName: location for location in mygame_locations}
-    shrine_upgrades = {location.original_item for location in mygame_locations}
+    shrine_upgrades = [location.original_item for location in mygame_locations]
 
     # Items can be grouped using their names to allow easy checking if any item
     # from that group has been collected. Group names can also be used for !hint
@@ -46,7 +46,7 @@ class CotLWorld(World):
     #}
 
     def generate_early(self) -> None:
-        pass  # nothing to do here for now
+        self.shrine_dict = {}
 
     def create_regions(self) -> None:
         # Create regions here and add them to self.regions
@@ -88,16 +88,20 @@ class CotLWorld(World):
         for item in map(self.create_item, mygame_items):
             self.multiworld.itempool.append(item)
 
+    def post_fill(self):
+        location_list = self.multiworld.get_locations(self.player)
+        print(location_list)
+        for loc in location_list:
+            location_data = self.locations_by_name[loc.name]
+            item_data = self.items_by_name[loc.item.name]
+            print(f"{loc.name}, {location_data.original_item}, {loc.item.name}, {item_data.upgrade_name}")
+            self.shrine_dict[location_data.original_item] = item_data.upgrade_name
 
     def generate_output(self, output_directory: str) -> None:
         # This is where you would write any output files needed to run the game with the generated world.
         # This could be a spoiler log, a patch file, or something else. It can also be left empty if
         # no output is needed.
-        location_list = self.multiworld.get_locations(self.player)
-        for loc in location_list:
-            location_data = self.locations_by_name[loc.name]
-            item_data = self.items_by_name[loc.item.name]
-            self.shrine_dict[location_data.original_item] = item_data.upgrade_name
+        
 
         self.slot_data_ready.set()
 
@@ -111,9 +115,9 @@ class CotLWorld(World):
             "AP_seed": str(self.multiworld.seed),
             "AP_slotName": self.multiworld.player_name[self.player],
             "AP_PlayerID": self.player,
-            "URL": "archipelago.gg",
-            "port": str(38281),
             "shrine_dict": self.shrine_dict,
+            "item_small": {item.itemName: item.upgrade_name for item in mygame_items},
+            "locations": {location.original_item: {"locationName": location.locationName, "old_name": location.old_name} for location in mygame_locations},
             "goal": "collect_poop"
         }
         return slot_data
