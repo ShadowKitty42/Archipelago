@@ -13,7 +13,7 @@ class LocationData:
     menu_name: str
     tier: int
     position: str
-    region: str
+    #region: str
     def __init__(self, old_name, original_item, menu_name, tier, position ):
         self.locationName = f"{menu_name} Tier{tier} {position}"
         self.old_name = old_name
