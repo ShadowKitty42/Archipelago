@@ -82,7 +82,7 @@ class CotLWorld(World):
                 refinery_region.locations.append(location)
         self.multiworld.regions.append(refinery_region)
 
-        menu_region.connect(refinery_region, None, lambda state: can_refine_materials(self.player, state))
+        menu_region.connect(refinery_region, None, lambda state: can_survive(self.player, state))
 
     def create_items(self) -> None:
         for item in map(self.create_item, mygame_items):
