@@ -93,9 +93,12 @@ class CotLWorld(World):
         print(location_list)
         for loc in location_list:
             location_data = self.locations_by_name[loc.name]
-            item_data = self.items_by_name[loc.item.name]
-            print(f"{loc.name}, {location_data.original_item}, {loc.item.name}, {item_data.upgrade_name}")
-            self.shrine_dict[location_data.original_item] = item_data.upgrade_name
+            if loc.item.player == self.player:
+                item_data = self.items_by_name[loc.item.name]
+                print(f"{loc.name}, {location_data.original_item}, {loc.item.name}, {item_data.upgrade_name}")
+                self.shrine_dict[location_data.original_item] = f"{item_data.upgrade_name}>>{self.player}"
+            else:
+                self.shrine_dict[location_data.original_item] = f"{loc.item.name}>>{loc.item.player}"
 
     def generate_output(self, output_directory: str) -> None:
         # This is where you would write any output files needed to run the game with the generated world.
