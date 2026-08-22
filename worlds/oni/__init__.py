@@ -82,7 +82,7 @@ class ONIWorld(World):
     web = ONIWeb()
     base_id = 0x257514000  # 0xYGEN___, clever! Thanks, Medic
     data_version = 0
-    ap_version = "0.9.11.0"
+    ap_version = "0.9.12.0"
 
     default_item_list = {}
     mod_item_list = {}
