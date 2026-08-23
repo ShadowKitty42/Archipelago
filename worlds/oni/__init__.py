@@ -116,7 +116,8 @@ class ONIWorld(World):
     resource_checks: typing.List[str]
     mod_json: ModJson
     ap_mod_items: typing.List[str]
-    local_items: typing.List[str]
+    local_items: typing.List[ONIItem]
+    local_item_names: typing.List[str]
     filler_item_names: typing.List[str]
     regions_by_name: typing.Dict[str, Region]
 
@@ -244,6 +245,7 @@ class ONIWorld(World):
         self.all_regions = []
         self.all_locations = []
         self.ap_mod_items = []
+        self.local_item_names = []
         self.local_items = []
 
         if self.options.spaced_out.value:
@@ -253,7 +255,7 @@ class ONIWorld(World):
             self.frosty = True
         if self.options.bionic.value:
             self.bionic = True
-            self.local_items.append("Crafting Station")
+            self.local_item_names.append("Crafting Station")
         if self.options.prehistoric.value:
             self.prehistoric = True
         if self.options.aquatic.value:
@@ -567,10 +569,12 @@ class ONIWorld(World):
         to the MultiWorld after this step. If items need to be placed during pre_fill use `get_prefill_items`.
         """
         for item in self.all_items:
-            if item.itemName not in self.local_items:
-                new_item = self.create_item(item.itemName)
-                new_item.classification = item.progression
+            new_item = self.create_item(item.itemName)
+            new_item.classification = item.progression
+            if item.itemName not in self.local_item_names:
                 self.multiworld.itempool.append(new_item)
+            else:
+                self.local_items.append(new_item)
 
         item_count = len(self.all_items)
         location_count = len(self.all_locations)
@@ -706,6 +710,9 @@ class ONIWorld(World):
         """
         pass
 
+    def get_pre_fill_items(self):
+        return self.local_items
+
     def pre_fill(self) -> None:
         """Optional method that is supposed to be used for special fill stages. This is run *after* plando."""
         from Fill import fill_restrictive
@@ -713,7 +720,7 @@ class ONIWorld(World):
         world = self.multiworld
         player = self.player
         all_state = world.get_all_state(use_cache=True)
-        local_items = [self.create_item(name) for name in self.local_items]
+        #local_items = [self.create_item(name) for name in self.local_items]
         #suits = [self.create_item(name) for name in ['Atmo Suit', 'Jet Suit Pattern', 'Oxygen Mask Pattern']]
         #if self.spaced_out == True:
         #    local_items.append(self.create_item('Lead Suit'))
@@ -731,9 +738,9 @@ class ONIWorld(World):
         with open(output_file_path, "w") as file:
             file.write(json_string)'''
 
-        fill_restrictive(world, all_state, locs, local_items, True, True, name="ONI Add Local Item")
+        fill_restrictive(world, all_state, locs, self.local_items, True, True, name="ONI Add Local Item")
                          
-        for item in local_items:
+        for item in self.local_items:
             self.options.local_items.value.add(item.name)
 
     def fill_hook(self,
@@ -748,7 +755,7 @@ class ONIWorld(World):
         """Optional Method that is called after regular fill. Can be used to do adjustments before output generation.
         This happens before progression balancing, so the items may not be in their final locations yet."""
 
-    def generate_output(self, output_directory: str) -> None:
+    def pre_output(self) -> None:
         """This method gets called from a threadpool, do not use multiworld.random here.
         If you need any last-second randomization, use self.random instead."""
         # TODO generate mod json
@@ -773,17 +780,17 @@ class ONIWorld(World):
                 self.science_dicts[tech_name].append(output_item_name)
 
         self.mod_json = ModJson(str(self.multiworld.seed), self.multiworld.player_name[self.player], self.spaced_out, self.frosty, self.bionic, self.science_dicts)
-        json_string = self.mod_json.to_json(indent=4)
+        '''json_string = self.mod_json.to_json(indent=4)
         output_file_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}.json")
         with open(output_file_path, "w") as file:
-            file.write(json_string)
+            file.write(json_string)'''
 
-        json_string = json.dumps(self.get_data_package_data(), default=lambda o: o.__dict__, indent=4)
+        '''json_string = json.dumps(self.get_data_package_data(), default=lambda o: o.__dict__, indent=4)
         output_file_path = os.path.join(Utils.user_path("data", "ONI"), f"..\\data_package.json")
         with open(output_file_path, "w") as file:
-            file.write(json_string)
+            file.write(json_string)'''
 
-        self.slot_data_ready.set()
+        #self.slot_data_ready.set()
 
         '''ap_json = APJson(self.ap_items)
         json_string = ap_json.to_json(indent=4)
@@ -805,7 +812,7 @@ class ONIWorld(World):
 
         The generation does not wait for `generate_output` to complete before calling this.
         `threading.Event` can be used if you need to wait for something from `generate_output`."""
-        self.slot_data_ready.wait()
+        #self.slot_data_ready.wait()
         planet = self.options.cluster.current_key
         if self.base_only:
             planet = self.options.cluster_base.current_key
