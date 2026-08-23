@@ -67,7 +67,7 @@ class ONIWeb(WebWorld):
         "Multiworld Setup Guide",
         "A guide to setting up the Oxygen Not Included Randomizer connected to an Archipelago Multiworld",
         "English",
-        "docs/setup_en.md",
+        "setup_en.md",
         "setup/en",
         ["digiholic"]
     )
@@ -261,11 +261,12 @@ class ONIWorld(World):
         if self.options.aquatic.value:
             self.aquatic = True
             
-        self.filler_item_names = care_packages_base.copy()
+        #self.filler_item_names = care_packages_base.copy()
+        self.filler_item_names = [f"Care Package: {care_package}" for care_package in care_packages_base]
         if self.frosty:
-            self.filler_item_names += care_packages_frosty.copy()
+            self.filler_item_names += [f"Care Package: {care_package}" for care_package in care_packages_frosty]
         if self.bionic:
-            self.filler_item_names += care_packages_bionic.copy()
+            self.filler_item_names += [f"Care Package: {care_package}" for care_package in care_packages_bionic]
 
         self.teleporter_enabled = self.options.teleporter.value
 
@@ -591,7 +592,7 @@ class ONIWorld(World):
             logging.warning(f"Player: {self.multiworld.get_player_name(self.player)} Adding {junk} junk items to fill the item pool")
             junk_list = self.multiworld.random.choices(self.filler_item_names, k = junk)
             for junk_item in junk_list:
-                new_item = self.create_item(f"Care Package: {junk_item}")
+                new_item = self.create_item(junk_item)
                 new_item.classification = ItemClassification.filler
                 self.multiworld.itempool.append(new_item)
 
@@ -853,4 +854,9 @@ class ONIWorld(World):
         return ONIItem(item.itemName, item.progression, self.item_name_to_id[name], self.player)
 
     def get_filler_item_name(self) -> str:
+        self.filler_item_names = [f"Care Package: {care_package}" for care_package in care_packages_base]
+        if self.frosty:
+            self.filler_item_names += [f"Care Package: {care_package}" for care_package in care_packages_frosty]
+        if self.bionic:
+            self.filler_item_names += [f"Care Package: {care_package}" for care_package in care_packages_bionic]
         return self.random.choice(self.filler_item_names)
